@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Recipes</string>
+    <string name="recipes">Recipes</string>
+    <string name="favorite_recipes">Favorite recipes</string>
+    <string name="my_recipes">My recipes</string>
+
+
+    <string name="open">Open navigation drawer</string>
+    <string name="close">Close navigation drawer</string>
+</resources>
