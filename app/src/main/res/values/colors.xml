@@ -6,6 +6,7 @@
 
     <color name="red">#E16767</color>
     <color name="purple">#7D50BD</color>
+    <color name="purple_light">#F8D3DD</color>
 
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>

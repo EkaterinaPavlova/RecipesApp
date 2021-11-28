@@ -7,4 +7,10 @@
 
     <string name="open">Open navigation drawer</string>
     <string name="close">Close navigation drawer</string>
+
+    <string name="no_internet_connection">
+        No internet connection.
+        \n
+        Please try again
+    </string>
 </resources>
