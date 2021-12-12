@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.hfad.recipesapp.R
 import com.hfad.recipesapp.databinding.FragmentRecipesBinding
+import dagger.hilt.android.AndroidEntryPoint
+
 
 class RecipesFragment : Fragment(R.layout.fragment_recipes) {
 
@@ -23,6 +25,11 @@ class RecipesFragment : Fragment(R.layout.fragment_recipes) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
+
+
+
 
 
 

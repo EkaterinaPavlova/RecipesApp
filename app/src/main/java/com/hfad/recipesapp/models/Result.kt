@@ -3,7 +3,7 @@ package com.hfad.recipesapp.models
 import com.google.gson.annotations.SerializedName
 
 data class Result(
-    @SerializedName("aggregateLikes")
+    @SerializedName("aggregateLikes") // лайки других пользователей
     val aggregateLikes: Int,
     @SerializedName("cheap")
     val cheap: Boolean,
@@ -25,9 +25,9 @@ data class Result(
     val sourceName: String,
     @SerializedName("sourceUrl")
     val sourceUrl: String,
-    @SerializedName("summary")
+    @SerializedName("summary") // описание рецепта
     val summary: String,
-    @SerializedName("title")
+    @SerializedName("title") // название рецепта
     val title: String,
     @SerializedName("vegan")
     val vegan: Boolean,
