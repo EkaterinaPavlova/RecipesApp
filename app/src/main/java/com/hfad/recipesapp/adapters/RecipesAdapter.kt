@@ -3,45 +3,51 @@ package com.hfad.recipesapp.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.hfad.recipesapp.data.network.ApiResponse
 import com.hfad.recipesapp.databinding.ItemRecipeBinding
-import com.hfad.recipesapp.models.FoodRecipe
-import com.hfad.recipesapp.models.Result
-import com.hfad.recipesapp.util.RecipesDiffUtil
 
-class RecipesAdapter : RecyclerView.Adapter<RecipesAdapter.RecipesViewHolder>() {
-
-    private var recipes = emptyList<Result>()
+class RecipesAdapter() :
+    ListAdapter<ApiResponse.Result, RecipesAdapter.ViewHolder>(
+        Comparator()
+    ) {
 
     override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): RecipesAdapter.RecipesViewHolder {
-        val layoutInflater = LayoutInflater.from(parent.context)
-        val binding = ItemRecipeBinding.inflate(layoutInflater, parent, false)
-        return RecipesViewHolder(binding)
+        parent: ViewGroup, viewType: Int
+    ): ViewHolder {
+        val binding =
+            ItemRecipeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+
+        return ViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: RecipesAdapter.RecipesViewHolder, position: Int) {
-        val currentRecipe = recipes[position]
-        holder.bind(currentRecipe)
-    }
-
-    override fun getItemCount(): Int = recipes.size
-
-    fun setData(newData: FoodRecipe){
-        val recipesDiffUtil = RecipesDiffUtil(recipes, newData.results)
-        val diffUtilResult = DiffUtil.calculateDiff(recipesDiffUtil)
-        recipes = newData.results
-        diffUtilResult.dispatchUpdatesTo(this)
-    }
-
-
-    class RecipesViewHolder(private val binding: ItemRecipeBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-
-        fun bind(result: Result) {
-            binding.nameRecipe.text = result.title
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val currentItem = getItem(position)
+        if (currentItem != null) {
+            holder.bind(currentItem)
         }
+    }
+
+    class ViewHolder(private val binding: ItemRecipeBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(recipe: ApiResponse.Result) {
+            binding.apply {
+                nameRecipe.text = recipe.title
+
+                Glide.with(itemView.context)
+                    .load(recipe.image)
+                    .into(imageRecipe)
+            }
+        }
+    }
+
+    class Comparator : DiffUtil.ItemCallback<ApiResponse.Result>() {
+        override fun areItemsTheSame(oldItem: ApiResponse.Result, newItem: ApiResponse.Result) =
+            oldItem.id == newItem.id
+
+        override fun areContentsTheSame(oldItem: ApiResponse.Result, newItem: ApiResponse.Result) =
+            oldItem == newItem
     }
 }

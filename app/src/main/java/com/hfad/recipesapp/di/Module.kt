@@ -7,6 +7,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
@@ -16,14 +17,23 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object Module {
 
-    @Singleton
+//    @Singleton
+//    @Provides
+//    fun provideHttpClient() : OkHttpClient{
+//        return OkHttpClient.Builder()
+//            .readTimeout(15, TimeUnit.SECONDS)
+//            .connectTimeout(15, TimeUnit.SECONDS)
+//            .build()
+//    }
+
     @Provides
-    fun provideHttpClient() : OkHttpClient{
-        return OkHttpClient.Builder()
-            .readTimeout(15, TimeUnit.SECONDS)
-            .connectTimeout(15, TimeUnit.SECONDS)
+    @Singleton
+    fun provideClient(): OkHttpClient =
+        OkHttpClient.Builder()
+            .addInterceptor(HttpLoggingInterceptor().apply {
+                level = HttpLoggingInterceptor.Level.BODY
+            })
             .build()
-    }
 
     @Singleton
     @Provides
@@ -34,12 +44,12 @@ object Module {
     @Singleton
     @Provides
     fun provideRetrofitInstance(
-        okHttpClient: OkHttpClient,
+       // okHttpClient: OkHttpClient,
         gsonConverterFactory: GsonConverterFactory
     ) : Retrofit {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
-            .client(okHttpClient)
+            .client(provideClient())
             .addConverterFactory(gsonConverterFactory)
             .build()
     }

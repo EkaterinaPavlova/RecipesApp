@@ -13,7 +13,9 @@ import com.hfad.recipesapp.ui.fragments.MyRecipesFragment
 import com.hfad.recipesapp.ui.fragments.RecipesFragment
 import androidx.appcompat.app.ActionBarDrawerToggle
 import com.hfad.recipesapp.R
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding

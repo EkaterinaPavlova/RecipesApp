@@ -1,39 +1,31 @@
 package com.hfad.recipesapp.ui.fragments
 
 import android.os.Bundle
-import android.view.LayoutInflater
+import android.util.Log
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.hfad.recipesapp.R
+import com.hfad.recipesapp.adapters.RecipesAdapter
 import com.hfad.recipesapp.databinding.FragmentRecipesBinding
+import com.hfad.recipesapp.viewmodels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class RecipesFragment : Fragment(R.layout.fragment_recipes) {
 
-    private lateinit var binding: FragmentRecipesBinding
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentRecipesBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+    private val binding: FragmentRecipesBinding by viewBinding()
+    private val viewModel by viewModels<MainViewModel>()
+    private val adapter = RecipesAdapter()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.recyclerView.adapter = adapter
 
-
-
-
-
-
-
-
-
+        viewModel.recipes.observe(viewLifecycleOwner, Observer {
+            adapter.submitList(it.results)
+        })
     }
-
 }
