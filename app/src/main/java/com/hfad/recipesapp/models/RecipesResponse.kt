@@ -1,6 +1,6 @@
-package com.hfad.recipesapp.data.network
+package com.hfad.recipesapp.models
 
-data class ApiResponse(
+data class RecipesResponse(
     val number: Int,
     val offset: Int,
     val results: List<Result>,

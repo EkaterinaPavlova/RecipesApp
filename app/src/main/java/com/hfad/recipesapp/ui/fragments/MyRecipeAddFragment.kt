@@ -32,16 +32,23 @@ class MyRecipeAddFragment : Fragment(R.layout.fragment_my_recipe_add) {
 
         val range = 0..10000
         binding.saveRecipe.setOnClickListener {
-            myRecipeViewModel.insert(
-                MyRecipe(
-                    id = range.random(),
-                    title = binding.titleRecipe.text.toString(),
-                    ingredients = binding.ingredients.text.toString(),
-                    summary = binding.summary.text.toString()
+            if(binding.titleRecipe.text.isNullOrEmpty() ||
+                binding.ingredients.text.isNullOrEmpty() ||
+                binding.summary.text.isNullOrEmpty()){
+                Toast.makeText(requireContext(), "Please, fill in form fields.", Toast.LENGTH_SHORT).show()
+
+            } else {
+                myRecipeViewModel.insert(
+                    MyRecipe(
+                        id = range.random(),
+                        title = binding.titleRecipe.text.toString(),
+                        ingredients = binding.ingredients.text.toString(),
+                        summary = binding.summary.text.toString()
+                    )
                 )
-            )
-            Toast.makeText(requireContext(), "New recipe created!", Toast.LENGTH_SHORT).show()
-            parentFragmentManager.popBackStack()
+                Toast.makeText(requireContext(), "New recipe created!", Toast.LENGTH_SHORT).show()
+                parentFragmentManager.popBackStack()
+            }
 
         }
     }

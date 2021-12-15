@@ -20,17 +20,12 @@
     </style>
 
     <style name="MySearchViewStyle" parent="Widget.AppCompat.SearchView">
-
-        <item name="android:backgroundTint">#DCC96E</item>
         <item name="android:background">@drawable/searchview_background</item>
-        <item name="android:textColorHint">@color/white</item>
-
     </style>
 
 
     <style name="Text" parent = "TextAppearance.Design.Counter">
         <item name="android:textSize">14sp</item>
-
         <item name="android:textColor">@color/black</item>
     </style>
 </resources>

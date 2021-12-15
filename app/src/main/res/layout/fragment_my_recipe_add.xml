@@ -79,9 +79,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="10dp"
-            android:backgroundTint="#CDC38C"
-            android:layout_gravity="center_horizontal"
-            android:elevation="10dp"
+            android:layout_marginEnd="20dp"
+            android:outlineSpotShadowColor="#B98AC663"
+            android:backgroundTint="#B98AC663"
+            android:layout_gravity="end"
+            app:cardElevation="2dp"
             app:cardCornerRadius="10dp">
 
 

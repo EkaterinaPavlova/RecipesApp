@@ -14,11 +14,11 @@ import com.hfad.recipesapp.viewmodels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class RecipesFragment : Fragment(R.layout.fragment_recipes) {
+class RecipesFragment : Fragment(R.layout.fragment_recipes), RecipesAdapter.Listener {
 
     private val binding: FragmentRecipesBinding by viewBinding()
     private val viewModel by viewModels<MainViewModel>()
-    private val adapter = RecipesAdapter()
+    private val adapter = RecipesAdapter(this)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -27,5 +27,18 @@ class RecipesFragment : Fragment(R.layout.fragment_recipes) {
         viewModel.recipes.observe(viewLifecycleOwner, Observer {
             adapter.submitList(it.results)
         })
+    }
+
+    override fun clickItem(id: Int) {
+
+        parentFragmentManager
+            .beginTransaction()
+            .replace(
+                R.id.fragment_container_view,
+                RecipeDetailsFragment.newInstance(id)
+            )
+            .addToBackStack(null)
+            .commit()
+
     }
 }

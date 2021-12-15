@@ -6,13 +6,17 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.hfad.recipesapp.data.network.ApiResponse
+import com.hfad.recipesapp.models.RecipesResponse
 import com.hfad.recipesapp.databinding.ItemRecipeBinding
 
-class RecipesAdapter() :
-    ListAdapter<ApiResponse.Result, RecipesAdapter.ViewHolder>(
-        Comparator()
-    ) {
+class RecipesAdapter(
+    private val listener: Listener
+) :
+    ListAdapter<RecipesResponse.Result, RecipesAdapter.ViewHolder>(Comparator()) {
+
+    interface Listener {
+        fun clickItem(id: Int)
+    }
 
     override fun onCreateViewHolder(
         parent: ViewGroup, viewType: Int
@@ -28,26 +32,30 @@ class RecipesAdapter() :
         if (currentItem != null) {
             holder.bind(currentItem)
         }
+
+        holder.itemView.setOnClickListener {
+            listener.clickItem(currentItem.id)
+        }
     }
 
     class ViewHolder(private val binding: ItemRecipeBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(recipe: ApiResponse.Result) {
+        fun bind(recipe: RecipesResponse.Result) {
             binding.apply {
                 nameRecipe.text = recipe.title
 
-                Glide.with(itemView.context)
-                    .load(recipe.image)
-                    .into(imageRecipe)
+//                Glide.with(itemView.context)
+//                    .load(recipe.image)
+//                    .into(imageRecipe)
             }
         }
     }
 
-    class Comparator : DiffUtil.ItemCallback<ApiResponse.Result>() {
-        override fun areItemsTheSame(oldItem: ApiResponse.Result, newItem: ApiResponse.Result) =
+    class Comparator : DiffUtil.ItemCallback<RecipesResponse.Result>() {
+        override fun areItemsTheSame(oldItem: RecipesResponse.Result, newItem: RecipesResponse.Result) =
             oldItem.id == newItem.id
 
-        override fun areContentsTheSame(oldItem: ApiResponse.Result, newItem: ApiResponse.Result) =
+        override fun areContentsTheSame(oldItem: RecipesResponse.Result, newItem: RecipesResponse.Result) =
             oldItem == newItem
     }
 }
