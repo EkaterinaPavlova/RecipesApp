@@ -5,12 +5,13 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.hfad.recipesapp.models.FavoriteRecipe
 import com.hfad.recipesapp.models.MyRecipe
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-@Database(entities = [MyRecipe::class], version = 1, exportSchema = false)
+@Database(entities = [MyRecipe::class, FavoriteRecipe::class], version = 1, exportSchema = false)
 abstract class MyRecipesRoomDatabase : RoomDatabase() {
 
     abstract fun myRecipesDao(): MyRecipesDao

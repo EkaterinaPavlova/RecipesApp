@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.hfad.recipesapp.App
 import com.hfad.recipesapp.R
 import com.hfad.recipesapp.databinding.FragmentMyRecipeDetailsBinding

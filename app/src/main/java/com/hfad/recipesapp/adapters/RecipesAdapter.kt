@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.hfad.recipesapp.R
 import com.hfad.recipesapp.models.RecipesResponse
 import com.hfad.recipesapp.databinding.ItemRecipeBinding
 
@@ -44,9 +46,12 @@ class RecipesAdapter(
             binding.apply {
                 nameRecipe.text = recipe.title
 
-//                Glide.with(itemView.context)
-//                    .load(recipe.image)
-//                    .into(imageRecipe)
+                Glide.with(itemView.context)
+                    .load(recipe.image)
+                    .centerCrop()
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .error(R.drawable.ic_baseline_error_24)
+                    .into(imageRecipe)
             }
         }
     }

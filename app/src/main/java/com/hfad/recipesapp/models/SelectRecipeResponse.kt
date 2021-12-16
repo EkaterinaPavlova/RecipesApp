@@ -11,6 +11,7 @@ data class SelectRecipeResponse(
     data class ExtendedIngredient(
         val id: Int,
         val image: String,
+        val original: String, // название игредиента уже с количеством
         val name: String,
         val amount: Double,
     )

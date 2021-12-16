@@ -31,7 +31,6 @@ class RemoteDataSource @Inject constructor(
         try {
 
             val selectRecipe = foodRecipesApi.getSelectRecipe(id, API_KEY)
-            Log.d("proverka","${selectRecipe.id} ${selectRecipe.title}")
             emit(selectRecipe)
         } catch (exception: HttpException) {
             Log.d("ExceptionProblem", exception.toString())

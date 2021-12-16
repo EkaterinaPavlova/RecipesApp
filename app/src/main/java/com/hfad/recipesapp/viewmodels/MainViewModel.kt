@@ -38,9 +38,6 @@ class MainViewModel @Inject constructor(
          viewModelScope.launch {
             repository.remote.getSelectRecipe(id).collect {
                 _selectRecipe.value = it
-                Log.d("proverka","view model ${_selectRecipe.value}")
-                Log.d("proverka","view model select recipe${selectRecipe.value}")
-
             }
         }
         return selectRecipe
