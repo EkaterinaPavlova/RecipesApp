@@ -8,9 +8,9 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.hfad.recipesapp.databinding.ActivityMainBinding
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
-import com.hfad.recipesapp.ui.fragments.FavoriteRecipesFragment
-import com.hfad.recipesapp.ui.fragments.MyRecipesFragment
-import com.hfad.recipesapp.ui.fragments.RecipesFragment
+import com.hfad.recipesapp.ui.fragments.favoriterecipes.FavoriteRecipesFragment
+import com.hfad.recipesapp.ui.fragments.myrecipes.MyRecipesFragment
+import com.hfad.recipesapp.ui.fragments.recipes.RecipesFragment
 import androidx.appcompat.app.ActionBarDrawerToggle
 import com.hfad.recipesapp.R
 import dagger.hilt.android.AndroidEntryPoint

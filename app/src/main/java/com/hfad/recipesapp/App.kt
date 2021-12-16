@@ -1,7 +1,7 @@
 package com.hfad.recipesapp
 
 import android.app.Application
-import com.hfad.recipesapp.data.MyRecipesRepository
+import com.hfad.recipesapp.db.MyRecipesRepository
 import com.hfad.recipesapp.db.MyRecipesRoomDatabase
 import dagger.hilt.android.HiltAndroidApp
 import kotlinx.coroutines.CoroutineScope

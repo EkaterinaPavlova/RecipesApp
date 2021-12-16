@@ -1,4 +1,4 @@
-package com.hfad.recipesapp.ui.fragments
+package com.hfad.recipesapp.ui.fragments.myrecipes
 
 import android.os.Bundle
 import android.view.View

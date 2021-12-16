@@ -1,7 +1,7 @@
 package com.hfad.recipesapp.viewmodels
 
 import androidx.lifecycle.*
-import com.hfad.recipesapp.data.MyRecipesRepository
+import com.hfad.recipesapp.db.MyRecipesRepository
 import com.hfad.recipesapp.models.FavoriteRecipe
 import com.hfad.recipesapp.models.MyRecipe
 import kotlinx.coroutines.launch

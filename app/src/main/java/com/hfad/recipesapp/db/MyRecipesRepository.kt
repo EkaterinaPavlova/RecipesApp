@@ -1,4 +1,4 @@
-package com.hfad.recipesapp.data
+package com.hfad.recipesapp.db
 
 import android.util.Log
 import androidx.annotation.WorkerThread

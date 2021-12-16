@@ -1,9 +1,9 @@
-package com.hfad.recipesapp.ui.fragments
+package com.hfad.recipesapp.ui.fragments.recipes
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -30,11 +30,14 @@ class RecipeDetailsFragment : Fragment(R.layout.fragment_recipe_details) {
         MyRecipesViewModelFactory((requireActivity().application as App).repository)
     }
 
+    private var favoriteRecipe: FavoriteRecipe? = null
+    private var recipeInDb: Boolean = false
+
     companion object {
 
         private const val ID_SELECT_RECIPE = "ID_SELECT_RECIPE"
 
-        fun newInstance(id: Int) : RecipeDetailsFragment {
+        fun newInstance(id: Int): RecipeDetailsFragment {
             val fragment = RecipeDetailsFragment()
             fragment.arguments = bundleOf(ID_SELECT_RECIPE to id)
             return fragment
@@ -49,7 +52,15 @@ class RecipeDetailsFragment : Fragment(R.layout.fragment_recipe_details) {
             selectRecipeId = arguments?.getInt(ID_SELECT_RECIPE)
         }
 
-        var favoriteRecipe: FavoriteRecipe? = null
+        myRecipeViewModel.allFavoriteRecipes.observe(viewLifecycleOwner, Observer { list ->
+            list.map { it ->
+                if (it.id == selectRecipeId) {
+                    binding.favorite.setBackgroundResource(R.drawable.ic_baseline_favorite_24_red)
+                    recipeInDb = true
+                }
+            }
+
+        })
 
         if (selectRecipeId != null) {
             viewModel.getSelectRecipe(selectRecipeId).observe(viewLifecycleOwner, Observer { it ->
@@ -81,10 +92,22 @@ class RecipeDetailsFragment : Fragment(R.layout.fragment_recipe_details) {
         }
 
         binding.favorite.setOnClickListener {
-            if(favoriteRecipe != null){
-                myRecipeViewModel.insertFavoriteRecipe(favoriteRecipe!!)
-                binding.favorite.setBackgroundColor(resources.getColor(R.color.red))
-                Toast.makeText(requireContext(), "Recipe added to favorite recipes!", Toast.LENGTH_SHORT).show()
+            if (favoriteRecipe != null) {
+                if (recipeInDb) {
+                    Toast.makeText(
+                        requireContext(),
+                        "The recipe is already in favorite recipes!",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } else {
+                    myRecipeViewModel.insertFavoriteRecipe(favoriteRecipe!!)
+                    binding.favorite.setBackgroundResource(R.drawable.ic_baseline_favorite_24_red)
+                    Toast.makeText(
+                        requireContext(),
+                        "Recipe added to favorite recipes!",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
         }
     }
