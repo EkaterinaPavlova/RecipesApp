@@ -4,13 +4,14 @@
     <string name="favorite_recipes">Favorite recipes</string>
     <string name="my_recipes">My recipes</string>
 
-
     <string name="open">Open navigation drawer</string>
     <string name="close">Close navigation drawer</string>
 
-    <string name="no_internet_connection">
-        No internet connection.
-        \n
-        Please try again
-    </string>
+    <string name="not_favorite_recipes">You don\'t have a single recipe in the\n\'Favorite recipes\'.\n\nDiscover your favorite recipe and press\nthe heart in the upper right corner.</string>
+    <string name="name_of_recipe">Name of recipe</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="summary">Summary</string>
+    <string name="save">Save</string>
+    <string name="not_my_recipes">You don\'t have a single recipe of your own.\nClick the button \'+\' to add it.</string>
+    <string name="add_to_favorite_recipes">Add to favorite recipes</string>
 </resources>

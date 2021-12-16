@@ -18,7 +18,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
-            android:backgroundTint="#F6EEF0"
+            android:backgroundTint="@color/purple_bg"
             app:cardCornerRadius="10dp"
 
             app:layout_constraintEnd_toEndOf="parent"
@@ -34,7 +34,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Name of recipe: "
+                    android:text="@string/name_of_recipe"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -42,8 +42,7 @@
                     android:id="@+id/title_recipe"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Гречка с курицей"
-                    android:textSize="14dp" />
+                    android:textSize="14sp" />
 
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
@@ -56,7 +55,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
-            android:backgroundTint="#F6EEF0"
+            android:backgroundTint="@color/purple_bg"
             app:cardCornerRadius="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -71,7 +70,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Ingredients: "
+                    android:text="@string/ingredients"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -79,8 +78,7 @@
                     android:id="@+id/ingredients"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Гречка с курицей"
-                    android:textSize="14dp" />
+                    android:textSize="14sp" />
 
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
@@ -92,7 +90,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
-            android:backgroundTint="#F6EEF0"
+            android:backgroundTint="@color/purple_bg"
             app:cardCornerRadius="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -108,7 +106,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Summary: "
+                    android:text="@string/summary"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -116,8 +114,7 @@
                     android:id="@+id/summary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Гречка с курицей"
-                    android:textSize="14dp" />
+                    android:textSize="14sp" />
 
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>

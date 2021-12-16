@@ -15,6 +15,7 @@ import com.hfad.recipesapp.App
 import com.hfad.recipesapp.R
 import com.hfad.recipesapp.databinding.FragmentRecipeDetailsBinding
 import com.hfad.recipesapp.models.FavoriteRecipe
+import com.hfad.recipesapp.util.NetworkResult
 import com.hfad.recipesapp.viewmodels.MainViewModel
 import com.hfad.recipesapp.viewmodels.MyRecipesViewModel
 import com.hfad.recipesapp.viewmodels.MyRecipesViewModelFactory
@@ -34,15 +35,14 @@ class RecipeDetailsFragment : Fragment(R.layout.fragment_recipe_details) {
     private var recipeInDb: Boolean = false
 
     companion object {
-
         private const val ID_SELECT_RECIPE = "ID_SELECT_RECIPE"
-
         fun newInstance(id: Int): RecipeDetailsFragment {
             val fragment = RecipeDetailsFragment()
             fragment.arguments = bundleOf(ID_SELECT_RECIPE to id)
             return fragment
         }
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -52,45 +52,17 @@ class RecipeDetailsFragment : Fragment(R.layout.fragment_recipe_details) {
             selectRecipeId = arguments?.getInt(ID_SELECT_RECIPE)
         }
 
-        myRecipeViewModel.allFavoriteRecipes.observe(viewLifecycleOwner, Observer { list ->
-            list.map { it ->
-                if (it.id == selectRecipeId) {
-                    binding.favorite.setBackgroundResource(R.drawable.ic_baseline_favorite_24_red)
-                    recipeInDb = true
-                }
-            }
-
-        })
-
         if (selectRecipeId != null) {
-            viewModel.getSelectRecipe(selectRecipeId).observe(viewLifecycleOwner, Observer { it ->
-
-                val listIngredients = it.extendedIngredients.map { ingredient ->
-                    ingredient.original
-                }
-
-                binding.titleRecipe.text = it.title
-                binding.summary.text = it.summary
-                binding.nameIngredients.text = listIngredients.toString() // поменять
-
-                Glide.with(this)
-                    .load(it.image)
-                    .centerCrop()
-                    .transition(DrawableTransitionOptions.withCrossFade())
-                    .error(R.drawable.ic_baseline_error_24)
-                    .into(binding.image)
-
-
-                favoriteRecipe = FavoriteRecipe(
-                    id = it.id,
-                    title = it.title,
-                    image = it.image,
-                    summary = it.summary,
-                    extendedIngredients = listIngredients.toString()
-                )
-            })
+            viewModel.getSelectRecipe(selectRecipeId)
         }
 
+        if (selectRecipeId != null) {
+            initObserve(selectRecipeId)
+        }
+        initListener()
+    }
+
+    private fun initListener() {
         binding.favorite.setOnClickListener {
             if (favoriteRecipe != null) {
                 if (recipeInDb) {
@@ -110,5 +82,55 @@ class RecipeDetailsFragment : Fragment(R.layout.fragment_recipe_details) {
                 }
             }
         }
+    }
+
+
+    private fun initObserve(selectRecipeId: Int) {
+        viewModel.selectRecipe.observe(viewLifecycleOwner, Observer { result ->
+
+            when(result) {
+                is NetworkResult.Success -> {
+                    val recipe = result.data
+                    val listIngredients = recipe.extendedIngredients.map { ingredient ->
+                        ingredient.original
+                    }
+
+                    binding.titleRecipe.text = recipe.title
+                    binding.summary.text = recipe.summary
+                    binding.nameIngredients.text = listIngredients.toString() // поменять
+
+                    Glide.with(this)
+                        .load(recipe.image)
+                        .centerCrop()
+                        .transition(DrawableTransitionOptions.withCrossFade())
+                        .error(R.drawable.ic_baseline_error_24)
+                        .into(binding.image)
+
+                    favoriteRecipe = FavoriteRecipe(
+                        id = recipe.id,
+                        title = recipe.title,
+                        image = recipe.image,
+                        summary = recipe.summary,
+                        extendedIngredients = listIngredients.toString()
+                    )
+
+                }
+                is NetworkResult.Error -> {
+                    Toast.makeText(context, "No internet connection", Toast.LENGTH_SHORT).show()
+                }
+                else -> Unit
+            }
+        })
+
+
+        myRecipeViewModel.allFavoriteRecipes.observe(viewLifecycleOwner, Observer { list ->
+            list.map { it ->
+                if (it.id == selectRecipeId) {
+                    binding.favorite.setBackgroundResource(R.drawable.ic_baseline_favorite_24_red)
+                    recipeInDb = true
+                }
+            }
+
+        })
     }
 }

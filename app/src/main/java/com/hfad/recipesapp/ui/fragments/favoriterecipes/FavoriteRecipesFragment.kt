@@ -35,6 +35,15 @@ class FavoriteRecipesFragment : Fragment(R.layout.fragment_favorite_recipes), Fa
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initObserve()
+
+        binding.apply {
+            recyclerView.layoutManager = LinearLayoutManager(context)
+            recyclerView.adapter = adapter
+        }
+    }
+
+    private fun initObserve(){
         myRecipeViewModel.allFavoriteRecipes.observe(viewLifecycleOwner, Observer { list ->
 
             if(list.isNullOrEmpty()){
@@ -46,12 +55,6 @@ class FavoriteRecipesFragment : Fragment(R.layout.fragment_favorite_recipes), Fa
                 adapter.submitList(list)
             }
         })
-
-
-        binding.apply {
-            recyclerView.layoutManager = LinearLayoutManager(context)
-            recyclerView.adapter = adapter
-        }
     }
 
     override fun clickItem(id: Int) {

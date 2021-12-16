@@ -50,9 +50,5 @@ class MyRecipeDetailsFragment : Fragment(R.layout.fragment_my_recipe_details) {
                 }
             })
         }
-
-
-
-
     }
 }

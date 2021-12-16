@@ -5,9 +5,15 @@
     <color name="purple_700">#FF3700B3</color>
 
     <color name="red">#E16767</color>
+    <color name="pink">#C51162</color>
+    <color name="brown">#412F39</color>
+
+
     <color name="purple">#7D50BD</color>
     <color name="purple_light">#F8D3DD</color>
+    <color name="purple_bg">#F6EEF0</color>
 
+    <color name="green">#B98AC663</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
 

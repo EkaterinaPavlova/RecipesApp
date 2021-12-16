@@ -24,10 +24,10 @@
             <EditText
                 android:id="@+id/title_recipe"
                 android:textSize="16sp"
-                android:textColor="#C51162"
+                android:textColor="@color/pink"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Name of recipe"
+                android:hint="@string/name_of_recipe"
                 app:hintTextAppearance="@style/Text"/>
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -44,10 +44,10 @@
             <EditText
                 android:id="@+id/ingredients"
                 android:textSize="16sp"
-                android:textColor="#C51162"
+                android:textColor="@color/pink"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Ingredients"
+                android:hint="@string/ingredients"
                 app:hintTextAppearance="@style/Text"/>
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -64,10 +64,10 @@
             <EditText
                 android:id="@+id/summary"
                 android:textSize="16sp"
-                android:textColor="#C51162"
+                android:textColor="@color/pink"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Summary"
+                android:hint="@string/summary"
                 app:hintTextAppearance="@style/Text"/>
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -80,8 +80,8 @@
             android:layout_marginTop="20dp"
             android:layout_marginBottom="10dp"
             android:layout_marginEnd="20dp"
-            android:outlineSpotShadowColor="#B98AC663"
-            android:backgroundTint="#B98AC663"
+            android:outlineSpotShadowColor="@color/green"
+            android:backgroundTint="@color/green"
             android:layout_gravity="end"
             app:cardElevation="2dp"
             app:cardCornerRadius="10dp">
@@ -104,7 +104,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="10dp"
-                    android:text="Save"
+                    android:text="@string/save"
                     android:textColor="@color/white"
                     android:textSize="20sp" />
 
